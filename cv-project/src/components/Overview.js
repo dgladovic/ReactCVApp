@@ -4,16 +4,25 @@ import EduExperience from "./EduExperience";
 
 function Overview(){
 
-    const [info,setInfo] = useState();
+    const [info,setInfo] = useState(12);
 
-    const Hanva = (e) => {
+    const hanva = (e) => {
         e.preventDefault();
-        console.log('test-123',e);
+        const formData = {};
+        for(let i = 0; i < e.target.length - 1; i++){
+            Object.defineProperty(formData,e.target[i].id,{
+                value: e.target[i].value,
+                writable: true 
+            });
+            if(e.target[i].value !== '')
+                formData[`${e.target[i].id}`]= e.target[i].value;
+        }
+        console.log(formData,'odavde');
     }
 
     return(
         <div>
-            <BasicInfo onSubmit={Hanva}/>
+            <BasicInfo hanva={hanva} ex={info}/>
             <EduExperience />
         </div>
     )

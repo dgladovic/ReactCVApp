@@ -10,12 +10,6 @@ class BasicInfo extends Component{
             email: '',
             phone: ''
         };
-
-        this.Haru = this.props.onSubmit;
-    }
-
-    Haru(){
-        console.log('eee');
     }
 
     handleChange(e){
@@ -26,28 +20,13 @@ class BasicInfo extends Component{
         }
     }
 
-    sendData(e){
-        e.preventDefault();
-        const formData = {};
-        for(let i = 0; i < e.target.length - 1; i++){
-            Object.defineProperty(formData,e.target[i].id,{
-                value: e.target[i].value,
-                writable: true 
-            });
-            if(e.target[i].value !== '')
-                formData[`${e.target[i].id}`]= e.target[i].value;
-        }
-        console.log(formData);
-        return formData;
-        }
-
-
     render(){
 
         const {name,email,phone} = this.state;
+        const {hanva,ex} = this.props;
 
         return(
-            <form onSubmit={this.sendData}>
+            <form onSubmit={hanva}>
             <div style={{ display: "flex", 
             flexDirection: "column",
             margin: "auto",
@@ -57,14 +36,13 @@ class BasicInfo extends Component{
             paddingBottom: "22px"
             }}>
                 <label htmlFor="name">Name: </label>
-                <input id="name" name="name" type="text" onChange={ (e) => this.handleChange(e)} value={name}></input>
+                <input id="name" name="name" type="text" onChange={ (e) => this.handleChange(e)} value={ex}></input>
 
                 <label htmlFor="email">E-Mail: </label>
                 <input id="email" type="email" onChange={(e) => this.handleChange(e)} value={email}></input>
 
                 <label htmlFor="phone">Phone No. : </label>
-                <input id="phone" type="tel" 
-                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                <input id="phone" type="number" 
                     onChange={(e) => this.handleChange(e)}
                     value={phone}
                 ></input>
